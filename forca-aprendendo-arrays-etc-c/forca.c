@@ -1,14 +1,47 @@
 #include <stdio.h>
-  
-  int main (int argc, char *argv[]){
-    char palavraSecreta[20];
+#include <string.h>
 
-    sprintf(palavraSecreta, "MELANCIA");
+int main(int argc, char *argv[]) {
+  char palavraSecreta[20];
 
-    printf("%s\n", palavraSecreta);
-    // printf("%s\n", palavraSecreta);
+  sprintf(palavraSecreta, "MELANCIA");
 
-  /* se fossemos definir as letras do array index por index o ultimo deve ter o valor "\0" para indicar fim do uso */
+  /* printf("%s\n", palavraSecreta);
+  se fossemos definir as letras do array index por index o ultimo deve ter o
+  valor "\1" para indicar fim do uso */
 
+  int acertou = 0;
+  int enforcou = 0;
 
-  }
+  char chutes[26];
+  int tentativas = 0;
+
+  do {
+
+    for (int i = 0; i < strlen(palavraSecreta); i++) {
+
+      int achou = 0;
+
+      for (int j = 0; j < tentativas; j++) {
+        if (chutes[j] == palavraSecreta[i]) {
+          achou = 1;
+          break;
+        }
+      }
+      if (achou) {
+        printf("%c ", palavraSecreta[i]);
+      } else {
+        printf("_ ");
+      }
+    }
+
+    printf("\n");
+
+    char chute;
+    scanf(" %c", &chute);
+
+    chutes[tentativas] = chute;
+    tentativas++;
+
+  } while (!acertou && !enforcou);
+}
